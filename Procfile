@@ -1,0 +1,1 @@
+worker: python3 /app/apptfj_daily/main.py
