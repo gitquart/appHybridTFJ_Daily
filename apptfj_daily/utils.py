@@ -22,13 +22,23 @@ objControl=cInternalControl()
 download_dir=objControl.download_dir
 
 def getDatesForSearch(strDate):
-    #mm/yyyy
+    #dd/mm/yyyy
     chunks=strDate.split('/')
-    month=chunks[0]
-    year=chunks[1]
+    day=chunks[0]
+    month=chunks[1]
+    year=chunks[2]
     fw,days=calendar.monthrange(int(year),int(month))
     lsDates=[]
-    lsDates.append('01/'+month+'/'+year)
+    #The first date of search is given by end of program
+    lsDates.append(day+'/'+month+'/'+year)
+    #The second date of seacth is given here
+    secondDate=''
+    if int(day)<days:
+        #Comparing days in the same
+        nextDay=int(day)+1
+        secondDate=str(nextDay)+'/'+month+'/'+year
+    else:
+
     lsDates.append(str(days)+'/'+month+'/'+year)
 
     return lsDates

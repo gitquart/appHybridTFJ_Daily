@@ -24,7 +24,6 @@ status= response.status_code
 if status==200:  
     #Read the information of query and page 
     lsInfo=[]
-    #1.Topic, 2. Page
     querySt="select query,page,fechaactual,fechafin from test.cjf_control where id_control="+str(idControl)+"  ALLOW FILTERING"
     resultSet=bd.getQuery(querySt)   
     if resultSet: 
