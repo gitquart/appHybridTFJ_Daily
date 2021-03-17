@@ -135,7 +135,7 @@ if status==200:
             #Changing query
             print('Btn next is NOT enabled, preparing next query...')
             print('All pages done, bye!...Heroku will turn me on again')
-            st="update test.cjf_control set fechaactual='"+str(strdtFin)+" where id_control="+str(idControl)+"; "
+            st="update test.cjf_control set fechaactual='"+str(strdtFin)+"' where id_control="+str(idControl)+"; "
             bd.executeStatement(st)
         else:    
             #Changing page process
@@ -147,13 +147,13 @@ if status==200:
             print('Checking if page is greater than 143...')
             if nPage>143:
                 print('Page greater than 143...changing query...')
-                st="update test.cjf_control set fechaactual='"+str(strdtFin)+" where id_control="+str(idControl)+"; "
+                st="update test.cjf_control set fechaactual='"+str(strdtFin)+"' where id_control="+str(idControl)+"; "
                 bd.executeStatement(st)
             os.sys.exit(0)
     else:
         #Changing query
         #No results for this date search
-        st="update test.cjf_control set fechaactual='"+str(strdtFin)+" where id_control="+str(idControl)+"; "
+        st="update test.cjf_control set fechaactual='"+str(strdtFin)+"' where id_control="+str(idControl)+"; "
         bd.executeStatement(st)
         print('------------No results-------------')
          
