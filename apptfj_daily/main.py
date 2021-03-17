@@ -137,6 +137,7 @@ if status==200:
             print('All pages done, bye!...Heroku will turn me on again')
             st="update test.cjf_control set fechaactual='"+str(strdtFin)+"' where id_control="+str(idControl)+"; "
             bd.executeStatement(st)
+            os.sys.exit(0)
         else:    
             #Changing page process
             nPage=startPage+1
@@ -156,6 +157,7 @@ if status==200:
         st="update test.cjf_control set fechaactual='"+str(strdtFin)+"' where id_control="+str(idControl)+"; "
         bd.executeStatement(st)
         print('------------No results-------------')
+        os.sys.exit(0)
          
       
 
