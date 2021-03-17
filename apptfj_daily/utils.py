@@ -29,17 +29,27 @@ def getDatesForSearch(strDate):
     year=chunks[2]
     fw,days=calendar.monthrange(int(year),int(month))
     lsDates=[]
-    #The first date of search is given by end of program
+    #Setting first day of query
     lsDates.append(day+'/'+month+'/'+year)
-    #The second date of seacth is given here
     secondDate=''
+    nextDay=''
+    nextMonth=''
+    nextYear=''
+    #Calculating second date of query
     if int(day)<days:
         #Comparing days in the same
         nextDay=int(day)+1
-        secondDate=str(nextDay)+'/'+month+'/'+year
+        secondDate=str(nextDay).zfill(2)+'/'+month+'/'+year
+        lsDates.append(secondDate)
     else:
-
-    lsDates.append(str(days)+'/'+month+'/'+year)
+        nextDay='01'
+        if int(month)==12:
+            nextMonth='01'
+            nextYear=int(year)+1
+        else:
+            nextMonth=int(month)+1  
+            nextYear=str(year)  
+        lsDates.append(str(nextDay)+'/'+str(nextMonth).zfill(2)+'/'+str(nextYear))
 
     return lsDates
 

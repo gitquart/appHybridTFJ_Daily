@@ -111,6 +111,7 @@ if status==200:
             tool.processRows(browser,row)
             countRow+=1
 
+        #Section After process: The page is completele read and it's changing to next page or changing the query
         #Page control
         print('Count of Rows:',str(countRow)) 
         #Update the info in file
@@ -120,24 +121,40 @@ if status==200:
         time.sleep(2)
         lsCount=len(btnNextSelector)
         print('End of page, cheking if btnNext is enabled or Not')
+        """
+            Logic to change dates in this Daily algorithm
+            When the page is done (Section After process) the code has 2 possibilities: change the page or change query
+            Case: Change page
+            -Just apply the update as in "Changing page process", add the current page + 1 and that's it
+            Case: Change the query
+            -When the Next btn is disabled then it's time to go to the next day, all you gotta do get the current "strdtFin"
+            value which es the second date of the search and update it to the table, when the code starts over it will
+            automatically get this date as the 1st date and will calculate the second date.
+            """
         if lsCount>0:
+            #Changing query
             print('Btn next is NOT enabled, preparing next query...')
             print('All pages done, bye!...Heroku will turn me on again')
-            tool.prepareNextQuery(strdates)
+            st="update test.cjf_control set fechaactual='"+str(strdtFin)+" where id_control="+str(idControl)+"; "
+            bd.executeStatement(st)
         else:    
+            #Changing page process
             nPage=startPage+1
-            st="update test.cjf_control set page="+str(nPage)+" where  id_control="+str(idControl)+";"  
+            st="update test.cjf_control set page="+str(nPage)+" where id_control="+str(idControl)+";"  
             bd.executeStatement(st)
             #Change the page with next
             print('Page well done...')
             print('Checking if page is greater than 143...')
             if nPage>143:
-                print('Page greater than 143...changig query...')
-                tool.prepareNextQuery(strdates)
+                print('Page greater than 143...changing query...')
+                st="update test.cjf_control set fechaactual='"+str(strdtFin)+" where id_control="+str(idControl)+"; "
+                bd.executeStatement(st)
             os.sys.exit(0)
     else:
+        #Changing query
         #No results for this date search
-        tool.prepareNextQuery(strdates)
+        st="update test.cjf_control set fechaactual='"+str(strdtFin)+" where id_control="+str(idControl)+"; "
+        bd.executeStatement(st)
         print('------------No results-------------')
          
       
