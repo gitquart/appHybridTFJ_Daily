@@ -23,6 +23,7 @@ def returnCluster():
 
     auth_provider = PlainTextAuthProvider(objCC.cc_user_test,objCC.cc_pwd_test)
     cluster = Cluster(cloud=cloud_config, auth_provider=auth_provider) 
+    cluster.protocol_version=66
 
     return cluster  
 
