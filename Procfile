@@ -1,1 +1,1 @@
-worker: python3 /app/apptfj_daily/main.py
+worker: python3 /app/apptfj_daily_2/main.py
